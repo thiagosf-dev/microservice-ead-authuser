@@ -61,7 +61,7 @@ public class UserModel implements Serializable {
 
     @Column(nullable = false)
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
-    private LocalDateTime lastUDateDate;
+    private LocalDateTime lastUpdateDate;
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
