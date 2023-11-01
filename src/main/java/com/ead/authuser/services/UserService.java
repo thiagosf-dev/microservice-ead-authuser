@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.ead.authuser.models.UserModel;
 
 public interface UserService {
@@ -15,4 +18,10 @@ public interface UserService {
     void delete(UserModel userModel);
 
     UserModel save(UserModel userModel);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByUsername(String username);
+
+    Page<UserModel> findAll(Pageable pageable);
 }
