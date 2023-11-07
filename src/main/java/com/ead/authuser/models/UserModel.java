@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.ead.authuser.enums.UserStatus;
 import com.ead.authuser.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,12 +22,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "TB_USERS")
 @Data
+@EqualsAndHashCode(callSuper = false)
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class UserModel implements Serializable {
+public class UserModel
+        extends RepresentationModel<UserModel>
+        implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,5 +1,7 @@
 package com.ead.authuser.controllers;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
@@ -26,7 +28,7 @@ import com.ead.authuser.dtos.UserDto;
 import com.ead.authuser.models.UserModel;
 import com.ead.authuser.services.UserService;
 import com.ead.authuser.specifications.SpecificationTemplate;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonView;;
 
 @RestController
 @CrossOrigin(maxAge = 3600, origins = "*")
@@ -41,6 +43,13 @@ public class UserController {
             SpecificationTemplate.UserSpec spec,
             @PageableDefault(direction = Direction.ASC, page = 0, size = 10, sort = "userId") Pageable pageable) {
         Page<UserModel> userModelPage = userService.findAll(spec, pageable);
+
+        if (!userModelPage.isEmpty()) {
+            for (UserModel userModel : userModelPage.toList()) {
+                userModel.add(linkTo(methodOn(UserController.class).getOneUser(userModel.getUserId())).withSelfRel());
+            }
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(userModelPage);
     }
 

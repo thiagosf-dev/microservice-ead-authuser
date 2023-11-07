@@ -10,7 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import net.kaczmarzyk.spring.data.jpa.web.SpecificationArgumentResolver;
 
 @Configuration
-public class ResolverConfig extends WebMvcConfigurationSupport {
+public class ResolverConfig
+        extends WebMvcConfigurationSupport {
 
     @Override
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
